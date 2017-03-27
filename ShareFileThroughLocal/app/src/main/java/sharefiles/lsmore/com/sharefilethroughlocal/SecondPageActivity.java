@@ -28,17 +28,24 @@ public class SecondPageActivity extends AppCompatActivity {
     }
 
     public void getObjectFromFile(){
-        try {
-            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(path));
-            try {
-              User user = (User) inputStream.readObject();
-                Log.e("SecondActivity","user:"+user.getUserName());
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(path));
+                    try {
+                        AnotherUser user = (AnotherUser) inputStream.readObject();
+                        Log.e("SecondActivity","user:"+user.getUserName());
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        }) .start();
+
     }
 
 }

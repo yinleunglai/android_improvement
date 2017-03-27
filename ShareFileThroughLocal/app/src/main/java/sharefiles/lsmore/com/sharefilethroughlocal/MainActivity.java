@@ -16,15 +16,14 @@ import java.io.OutputStream;
 public class MainActivity extends AppCompatActivity {
 
     String path = Environment.getExternalStorageDirectory()+"/savefile.txt";
-    User user;
+    AnotherUser user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-         user = new User();
-        user.setId(1002);
-        user.setUserName("simon");
+         user = new AnotherUser(1002,"simon");
+
 
 
     }
@@ -34,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         persistenToFile(user);
     }
 
-    public void persistenToFile(final User user){
+    public void persistenToFile(final AnotherUser user){
         new Thread(){
             @Override
             public void run() {
